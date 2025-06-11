@@ -27,9 +27,13 @@ EcoPages is a minimal, public diary platform that lets users share short diary e
 ## 📂 File Structure
 
 EcoPages/
+
 ├── index.html # Main diary submission page
+
 ├── styles.css # Custom CSS styling
+
 ├── script.js # JavaScript for sending/receiving data
+
 └── README.md # Project documentation
 
 
