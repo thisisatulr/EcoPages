@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="userstyle.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar left-sidebar">
+            <ul>
+                <li><a href="/MainPage/index.html" title="Home"><i class="fas fa-home"></i></a></li>
+                <li><a href="/MyJournal/journal.html" title="Journal"><i class="fas fa-book"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+            <div class="profile-card">
+                <img id="profile-img" src="default.jpg" alt="Profile Picture" class="profile-img" onclick="uploadProfilePic()">
+                <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
+
+                <h2 class="profile-name">
+                    <span id="name-text">Name</span>
+                    <button onclick="editProfile('name')"><i class="fas fa-pencil-alt"></i></button>
+                </h2>
+
+                <p class="username">
+                    <span id="username-text">@username</span>
+                    <button onclick="editProfile('username')"><i class="fas fa-pencil-alt"></i></button>
+                </p>
+
+                <p class="role-tag">
+                    <span id="role-text">Bio</span>
+                    <button onclick="editProfile('role')"><i class="fas fa-pencil-alt"></i></button>
+                </p>
+
+                <div class="stats">
+                    <div><strong>245</strong><span> Followers</span></div>
+                    <div><strong>180</strong><span> Following</span></div>
+                </div>
+
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+
+                <button class="save-btn" onclick="saveProfile()">
+                    <i class="fas fa-save"></i> Save Profile
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar right-sidebar">
+            <ul>
+                <li><a href="/SearchPage/search.html" title="Search"><i class="fas fa-search"></i></a></li>
+                <li><a href="/LandingPage/land.html" onclick="logout()" title="Logout"><i class="fas fa-power-off"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/1.18.1/tsparticles.min.js" crossorigin="anonymous"></script>
+    <script>
+        const SHEETDB_API = "https://sheetdb.io/api/v1/4h638w8e6mz47";
+
+        async function loadProfile() {
+            const email = localStorage.getItem("userEmail");
+            if (!email) return alert("Not logged in!");
+
+            const res = await fetch(`${SHEETDB_API}/search?email=${email}`);
+            const data = await res.json();
+
+            if (data.length === 0) return alert("User not found!");
+
+            const user = data[0];
+            document.getElementById("name-text").textContent = user.name || "";
+            document.getElementById("username-text").textContent = user.username || "";
+            document.getElementById("role-text").textContent = user.bio || "";
+            if (user.profilepic) {
+                document.getElementById("profile-img").src = user.profilepic;
+                document.getElementById("profile-img").setAttribute("data-img", user.profilepic);
+            }
+        }
+
+        function editProfile(field) {
+            const span = document.getElementById(`${field}-text`);
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = span.textContent;
+            input.onblur = () => {
+                span.textContent = input.value;
+                input.replaceWith(span);
+            };
+            span.replaceWith(input);
+            input.focus();
+        }
+
+        function uploadProfilePic() {
+            document.getElementById("profile-pic-input").click();
+        }
+
+        document.getElementById("profile-pic-input").addEventListener("change", function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.getElementById("profile-img");
+                img.src = e.target.result;
+                img.setAttribute("data-img", e.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        async function saveProfile() {
+            const email = localStorage.getItem("userEmail");
+            if (!email) return;
+
+            const name = document.getElementById("name-text").textContent;
+            const username = document.getElementById("username-text").textContent;
+            const bio = document.getElementById("role-text").textContent;
+            const profilepic = document.getElementById("profile-img").getAttribute("data-img") || "";
+
+            const body = {
+                data: {
+                    name,
+                    username,
+                    bio,
+                    profilepic
+                }
+            };
+
+            const res = await fetch(`${SHEETDB_API}/email/${email}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+
+            if (res.ok) {
+                alert("✅ Profile Updated!");
+            } else {
+                alert("❌ Failed to update profile.");
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "/LandingPage/land.html";
+        }
+
+        window.onload = loadProfile;
+    </script>
+</body>
+
+</html>

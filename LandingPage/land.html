@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoPages</title>
+
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+
+  <!-- Particles.js for particle background effect -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.1.3/tsparticles.bundle.min.js"></script>
+
+  <!-- TailwindCSS for styling -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Poppins Font for a modern look -->
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@4.5.0/css/poppins.min.css" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="landstyle.css" />
+</head>
+<div id="preloader" class="fixed inset-0 bg-black flex items-center justify-center z-50">
+  <!-- Add your GIF as a preloader animation -->
+  <img src="preloader.gif" alt="Loading..." class="w-128 h-128" />
+</div>
+
+
+<body class="bg-black text-white overflow-x-hidden transition-colors duration-300">
+  <!-- Particle Background -->
+  <!-- This canvas is used to create a particle effect in the background -->
+  <canvas id="tsparticles" class="fixed top-0 left-0 w-full h-full z-0 canvas-style"></canvas>
+
+  <!-- Navbar Section -->
+  <nav class="fixed top-0 left-0 w-full bg-black bg-opacity-70 z-50 p-6 flex justify-between items-center">
+    <!-- Logo or Site Name -->
+    <img src="logo.png" alt="EchoPages Logo" class="h-16 w-auto">
+
+    <!-- Hamburger Button for Mobile View -->
+    <button id="menuToggle" class="md:hidden text-cyan-400 focus:outline-none z-50" title="Toggle Menu">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-8 text-lg">
+      <li><a href="land.html" class="hover:text-green-400 transition">Home</a></li>
+      <li><a href="#about" class="hover:text-green-400 transition">About</a></li>
+      <li><a href="/DeveloperPage/dev.html" class="hover:text-green-400 transition">Contact</a></li>
+      <li><a href="/LoginPage/login.html" class="hover:text-green-400 transition glowing-text">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu"
+    class="md:hidden fixed top-0 left-0 w-full h-screen bg-black bg-opacity-95 flex flex-col items-center justify-center gap-8 text-2xl font-bold text-cyan-400 z-40 hidden">
+    <a href="land.html" class="hover:text-white" onclick="toggleMenu()">Home</a>
+    <a href="#about" class="hover:text-white" onclick="toggleMenu()">About</a>
+    <a href="/DeveloperPage/dev.html" class="hover:text-white" onclick="toggleMenu()">Contact</a>
+    <a href="/LoginPage/login.html" class="hover:text-white" onclick="toggleMenu()">Login</a>
+  </div>
+
+  <!-- Hero Section (Main Intro) -->
+  <section id="home" class="min-h-screen flex items-center justify-center text-center px-6 relative z-10">
+    <div>
+      <h1 class="text-5xl font-bold text-cyan-400 mb-4">Welcome to EchoPages</h1>
+      <p class="text-xl text-white mb-6">Feel. Share. Repeat.</p>
+      <!-- Get Started Button -->
+      <br>
+      <br>
+      <a href="/RegistrationPage/registartion.html"
+        class="bg-green-400 text-black font-bold px-8 py-4 rounded-full shadow-lg transform transition hover:scale-105 hover:bg-green-300 animate-glow">
+        Get Started
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about"
+    class="min-h-screen flex flex-col gap-[32rem] justify-center items-center px-6 md:px-10 z-20 space-y-64">
+
+    <!-- Block 1: Image Right, Text Left -->
+    <div class="grid md:grid-cols-2 gap-10 md:gap-20 items-center w-full max-w-6xl">
+      <div
+        class="text-container text-left text-lg opacity-0 transform -translate-x-16 px-4 md:px-12 order-1 md:order-1">
+        <h2 class="text-3xl font-bold text-cyan-400 mb-4">So, What’s the Story?</h2>
+        <p>
+          A simple, student-friendly platform to vibe, vent, and voice your daily thoughts.
+          Share blogs, rants, or random life updates — publicly and securely — because your story deserves to be heard.
+          <br /><br />
+          🌍 Built for Gen Z, by Gen Z.
+          Whether it's a study sesh meltdown, a midnight epiphany, or a wholesome memory — drop it here and connect with
+          a community that gets it.
+          <br /><br />
+          No pressure. No judgment. Just your vibes, your voice.
+        </p>
+      </div>
+      <div
+        class="image-container first-image rounded-xl w-full h-80 flex items-center justify-center opacity-0 transform translate-x-16 order-2 md:order-2">
+        <img src="image 1.png" alt="1" class="w-full h-full object-cover rounded-xl" />
+      </div>
+    </div>
+
+    <!-- Block 2: Image Right, Text Left -->
+    <div class="grid md:grid-cols-2 gap-10 md:gap-20 items-center w-full max-w-6xl">
+      <div
+        class="text-container text-left text-lg opacity-0 transform -translate-x-16 px-4 md:px-12 order-1 md:order-1">
+        <h2 class="text-3xl font-bold text-cyan-400 mb-4">Features That Just Hit Different</h2>
+        <p>
+          Tag your mood with emojis, from 😊 to 😭 — find posts by how you felt. Get nostalgic with “This Day Last Year”
+          throwbacks. Need privacy? Go ghost with Anonymous Mode. And when you’re out of words, let daily quotes and
+          prompts spark your next entry.
+        </p>
+      </div>
+      <div
+        class="image-container second-image rounded-xl w-full h-80 flex items-center justify-center opacity-0 transform translate-x-16 order-2 md:order-2">
+        <img src="image 2.png" alt="2" class="w-full h-full object-cover rounded-xl" />
+      </div>
+    </div>
+
+    <!-- Block 3: Image Right, Text Left -->
+    <div class="grid md:grid-cols-2 gap-10 md:gap-20 items-center w-full max-w-6xl">
+      <div
+        class="text-container text-left text-lg opacity-0 transform -translate-x-16 px-4 md:px-12 order-1 md:order-1">
+        <h2 class="text-3xl font-bold text-cyan-400 mb-4">Meet the Crew</h2>
+        <p>
+          We’re a squad of five students, each bringing something unique to the table, but all sharing the same vibe –
+          creating something that speaks to the now. EchoPages isn’t just a project; it’s our way of bringing a fresh
+          energy to the digital world. We’re building a space where creativity, tech, and the pulse of student life
+          collide. Stay tuned – we’re just getting started, and it’s going to be lit.
+        </p>
+      </div>
+      <div
+        class="image-container third-image rounded-xl w-full h-80 flex items-center justify-center opacity-0 transform translate-x-16 order-2 md:order-2">
+        <img src="the crew.png" alt="3" class="w-full h-full object-cover rounded-xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section with Smaller Image and "Join Us" Text -->
+  <!-- Join Us Section -->
+  <section id="join-us" class="min-h-screen flex flex-col justify-center items-center px-10 relative z-20">
+    <div
+      class="image-container join-image fade-in rounded-xl w-full max-w-4xl h-80 flex items-center justify-center opacity-1 transform translate-x-16 space-y-32">
+      <img src="main.png" alt="Join Us" class="w-full h-full object-cover rounded-xl" />
+    </div>
+    <br><br>
+    <div class="mt-8">
+      <h2 id="joinHeader" class="text-3xl font-bold text-cyan-400 mb-4 space-y-32"></h2>
+      <p class="text-center text-white">
+        Join us and let your voice be heard! Whether you want to share your thoughts, connect with others, or just vibe.
+      </p>
+    </div>
+  </section>
+  <br><br>
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn"
+    class="fixed bottom-10 right-10 bg-cyan-400 text-white p-3 rounded-full shadow-lg opacity-0 transform scale-0 transition-all hover:scale-110 hover:bg-cyan-500">
+    ↑
+  </button>
+
+  <!-- Footer Section -->
+  <footer class="text-center py-6 z-20 relative glowing-text">
+    <p>&copy; 2025 EchoPages. All rights reserved.</p>
+  </footer>
+
+  <!-- External JavaScript Files -->
+  <script src="animation.js"></script>
+  <script src="landscript.js"></script>
+</body>
+
+</html>
