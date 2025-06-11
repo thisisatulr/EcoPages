@@ -14,8 +14,8 @@
         <!-- Left Sidebar -->
         <div class="sidebar left-sidebar">
             <ul>
-                <li><a href="/MainPage/index.html" title="Home"><i class="fas fa-home"></i></a></li>
-                <li><a href="/MyJournal/journal.html" title="Journal"><i class="fas fa-book"></i></a></li>
+                <li><a href="/EcoPages/MainPage/index.html" title="Home"><i class="fas fa-home"></i></a></li>
+                <li><a href="/EcoPages/MyJournal/journal.html" title="Journal"><i class="fas fa-book"></i></a></li>
             </ul>
         </div>
 
@@ -58,8 +58,8 @@
         <!-- Right Sidebar -->
         <div class="sidebar right-sidebar">
             <ul>
-                <li><a href="/SearchPage/search.html" title="Search"><i class="fas fa-search"></i></a></li>
-                <li><a href="/LandingPage/land.html" onclick="logout()" title="Logout"><i class="fas fa-power-off"></i></a></li>
+                <li><a href="/EcoPages/SearchPage/search.html" title="Search"><i class="fas fa-search"></i></a></li>
+                <li><a href="/EcoPages/LandingPage/land.html" onclick="logout()" title="Logout"><i class="fas fa-power-off"></i></a></li>
             </ul>
         </div>
     </div>
@@ -149,7 +149,7 @@
 
         function logout() {
             localStorage.clear();
-            window.location.href = "/LandingPage/land.html";
+            window.location.href = "/EcoPages/LandingPage/land.html";
         }
 
         window.onload = loadProfile;
