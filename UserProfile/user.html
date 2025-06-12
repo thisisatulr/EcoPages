@@ -71,7 +71,7 @@
 
         async function loadProfile() {
             const email = localStorage.getItem("userEmail");
-            if (!email) return alert("Not logged in!");
+            if (!email) return alert("Logged in!");
 
             const res = await fetch(`${SHEETDB_API}/search?email=${email}`);
             const data = await res.json();
