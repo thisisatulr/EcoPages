@@ -1,4 +1,4 @@
-# 🌿 EcoPages – Public Diary Website (https://thisisatulr.github.io/EcoPages/LandingPage/index.html)
+# 🌿 [EcoPages – Public Diary Website] (https://thisisatulr.github.io/EcoPages/LandingPage/index.html)
 
 EcoPages is a minimal, public diary platform that lets users share short diary entries anonymously or with a username. Built with **HTML**, **CSS**, and **JavaScript**, the project uses **Google Sheets as a backend** via **Google Apps Script**, providing a free, serverless way to store and fetch diary entries.
 
